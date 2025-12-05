@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Natenomics – Economics Made Simple</title>
+  <meta name="description" content="Natenomics offers clear, modern economics tutoring and business insight – economics made simple.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0b2441;
+      --navy-soft: #16345a;
+      --gold: #f8b938;
+      --cream: #faf4e8;
+      --muted: #6f7a8c;
+      --radius: 16px;
+      --shadow-soft: 0 18px 45px rgba(9, 25, 52, 0.16);
+      --shadow-light: 0 10px 25px rgba(9, 25, 52, 0.12);
+      --transition: 0.25s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #fffaf0, #f4f6fb);
+      color: var(--navy);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin: 0 auto;
+    }
+
+    section { padding: 5rem 0; }
+    h1, h2, h3, h4 { font-weight: 700; letter-spacing: -0.03em; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(11, 36, 65, 0.06);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 600;
+      color: var(--navy-soft);
+    }
+
+    .pill span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--gold);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--navy), #1b3057);
+      color: #ffffff;
+      box-shadow: var(--shadow-soft);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 55px rgba(9, 25, 52, 0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--navy-soft);
+      border: 1px solid rgba(11, 36, 65, 0.22);
+    }
+    .btn-outline:hover {
+      background: #ffffff;
+      box-shadow: var(--shadow-light);
+      transform: translateY(-1px);
+    }
+
+    .muted { color: var(--muted); }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #ffffff;
+      padding: 0.25rem 0.9rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold), #ffd764);
+    }
+
+    /* NAVBAR */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(245, 247, 252, 0.97), rgba(245, 247, 252, 0.9));
+      border-bottom: 1px solid rgba(11, 36, 65, 0.06);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brand-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #fffef7, #f6be4a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(11, 36, 65, 0.18);
+    }
+
+    /* Put your real avatar image here */
+    .brand-avatar span {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .brand-text { display: flex; flex-direction: column; }
+    .brand-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .brand-tagline {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 0.15rem;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gold);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta { display: flex; align-items: center; gap: 0.8rem; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.35rem;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      margin: 4px 0;
+      border-radius: 999px;
+      background: var(--navy);
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    /* HERO */
+
+    #hero { padding: 4.25rem 0 4.5rem; }
+
+    .hero-grid {
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    }
+
+    .hero-title {
+      font-size: clamp(2.35rem, 4vw, 3rem);
+      margin: 1.1rem 0 0.8rem;
+    }
+
+    .hero-lead {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 34rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.6rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta strong { color: var(--navy-soft); }
+
+    .hero-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 1.75rem 1.6rem;
+      box-shadow: var(--shadow-soft);
+      max-width: 440px;
+      margin-left: auto;
+      border: 1px solid rgba(11, 36, 65, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .price {
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+    .price span {
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+
+    .hero-list {
+      list-style: none;
+      margin: 0.4rem 0 1.2rem;
+    }
+    .hero-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.9rem;
+      color: var(--navy-soft);
+      margin-bottom: 0.4rem;
+    }
+    .hero-list li span.bullet {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(248, 185, 56, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: #c48b09;
+      flex-shrink: 0;
+    }
+
+    .hero-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.7rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      margin-top: 1.4rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(11, 36, 65, 0.08);
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .hero-stats strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--navy-soft);
+    }
+
+    /* SECTIONS */
+
+    .section-heading {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 2.4rem;
+      max-width: 560px;
+    }
+
+    .section-heading p { font-size: 0.95rem; color: var(--muted); }
+
+    /* Services */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.6rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 8px 26px rgba(9, 25, 52, 0.08);
+      border: 1px solid rgba(11, 36, 65, 0.04);
+    }
+
+    .card h3 { font-size: 1.05rem; margin-bottom: 0.45rem; }
+    .card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.6rem; }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(11, 36, 65, 0.04);
+      color: var(--navy-soft);
+    }
+
+    /* How it works */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .step {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 1.3rem 1.2rem;
+      border: 1px dashed rgba(11, 36, 65, 0.12);
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(248, 185, 56, 0.16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #b77500;
+      margin-bottom: 0.55rem;
+    }
+
+    .step h3 {
+      font-size: 0.98rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    /* Testimonials */
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .testimonial {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 1.25rem 1.3rem;
+      box-shadow: 0 10px 26px rgba(9, 25, 52, 0.08);
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: "“";
+      position: absolute;
+      top: -16px;
+      left: 14px;
+      font-size: 3rem;
+      color: rgba(248, 185, 56, 0.4);
+    }
+
+    .testimonial p {
+      font-size: 0.9rem;
+      color: var(--navy-soft);
+      margin-bottom: 0.75rem;
+      margin-top: 0.4rem;
+    }
+
+    .testimonial span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* Resources */
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr;
+      gap: 1.6rem;
+    }
+
+    .resource-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 1.4rem 1.4rem;
+      box-shadow: 0 10px 28px rgba(9, 25, 52, 0.08);
+      border: 1px solid rgba(11, 36, 65, 0.05);
+    }
+
+    .resource-card h3 { font-size: 1.02rem; margin-bottom: 0.5rem; }
+    .resource-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.7rem; }
+
+    .resource-list {
+      list-style: none;
+      display: grid;
+      gap: 0.45rem;
+      font-size: 0.88rem;
+      color: var(--navy-soft);
+    }
+    .resource-list li::before {
+      content: "• ";
+      color: var(--gold);
+    }
+
+    .email-signup {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .email-signup input {
+      flex: 1;
+      padding: 0.65rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(11, 36, 65, 0.16);
+      font-family: inherit;
+      font-size: 0.88rem;
+    }
+
+    .email-signup input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(248, 185, 56, 0.25);
+    }
+
+    /* Contact */
+
+    #contact { padding-bottom: 4rem; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.6rem 1.6rem 1.4rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(11, 36, 65, 0.06);
+    }
+
+    .contact-card label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+      color: var(--navy-soft);
+    }
+
+    .contact-card input,
+    .contact-card textarea,
+    .contact-card select {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      margin-bottom: 0.85rem;
+      border-radius: 10px;
+      border: 1px solid rgba(11, 36, 65, 0.16);
+      font-family: inherit;
+      font-size: 0.9rem;
+      resize: vertical;
+    }
+
+    .contact-card textarea { min-height: 110px; }
+
+    .contact-card input:focus,
+    .contact-card textarea:focus,
+    .contact-card select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(248, 185, 56, 0.2);
+    }
+
+    .contact-side {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .contact-side ul {
+      list-style: none;
+      margin-top: 1rem;
+      display: grid;
+      gap: 0.35rem;
+    }
+    .contact-side li strong { color: var(--navy-soft); }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(11, 36, 65, 0.08);
+      padding: 1.5rem 0 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover { color: var(--navy-soft); }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card { margin: 0 auto; }
+      .cards, .steps, .testimonials-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .resources-grid, .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner { gap: 0.5rem; }
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+      .nav-toggle { display: block; }
+
+      .nav-menu-open .nav-links,
+      .nav-menu-open .nav-cta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+        padding: 0.75rem 0 0.35rem;
+      }
+
+      .nav-inner {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .cards, .steps, .testimonials-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      section { padding: 3.5rem 0; }
+      #hero { padding-top: 3.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#hero" class="brand">
+        <div class="brand-avatar">
+          <!-- Replace 'N' with your illustrated avatar image if you want -->
+          <span>N</span>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Natenomics</span>
+          <span class="brand-tagline">Economics Made Simple</span>
+        </div>
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Services</a>
+        <a href="#how">How it Works</a>
+        <a href="#testimonials">Results</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-cta" id="navCta">
+        <span class="badge">1:1 Spaces Open</span>
+        <a href="#contact" class="btn btn-primary" style="padding-inline:1.1rem;font-size:0.86rem;">Book a Call</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="pill">
+            <span class="dot"></span>
+            Economics tutoring • Business insight
+          </div>
+          <h1 class="hero-title">Economics made simple for exams, business and real life.</h1>
+          <p class="hero-lead">
+            Natenomics breaks down complex economic theory into clear, visual explanations –
+            so you can smash exams, make smarter decisions and actually enjoy the subject.
+          </p>
+
+          <div class="btn-row">
+            <a href="#contact" class="btn btn-primary">Book a free 15-min intro call</a>
+            <a href="#resources" class="btn btn-outline">Download free notes</a>
+          </div>
+
+          <div class="hero-meta">
+            <span><strong>GCSE &amp; A-Level:</strong> OCR • AQA • Edexcel</span>
+            <span><strong>Business:</strong> pricing • demand • macro trends</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Sample tutoring plan">
+          <div class="hero-card-header">
+            <span class="hero-label">Exam-ready tutoring plan</span>
+            <div class="price">£30<span>/hr</span></div>
+          </div>
+
+          <ul class="hero-list">
+            <li><span class="bullet">✓</span> Diagram-first explanations of every key model</li>
+            <li><span class="bullet">✓</span> Mark-scheme focused 10, 15 and 25-mark answers</li>
+            <li><span class="bullet">✓</span> Live feedback on essays and calculations</li>
+            <li><span class="bullet">✓</span> Personalised exam-day strategy &amp; revision plan</li>
+          </ul>
+
+          <button class="btn btn-primary" style="width:100%;margin-top:0.3rem;">Get my revision plan</button>
+          <p class="hero-note">
+            You’ll get a short questionnaire and a tailored plan for your spec + grade target within 24 hours.
+          </p>
+
+          <div class="hero-stats">
+            <div>
+              <strong>90%+</strong>
+              Grade 7–9 at GCSE
+            </div>
+            <div>
+              <strong>80%+</strong>
+              A/A* at A-Level
+            </div>
+            <div>
+              <strong>50+</strong>
+              Students supported
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div class="pill"><span class="dot"></span>What Natenomics offers</div>
+          <h2>From diagrams to decisions – choose what you need.</h2>
+          <p>
+            Pick the level of support that fits you: exam-focused tutoring, applied business economics
+            or help understanding real-world macro events.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>GCSE &amp; A-Level tutoring</h3>
+            <p>
+              Weekly 1:1 sessions covering your exact specification with live diagram practice, past paper walkthroughs and exam-style questions.
+            </p>
+            <div class="card-tags">
+              <span class="tag">OCR</span>
+              <span class="tag">AQA</span>
+              <span class="tag">Edexcel</span>
+              <span class="tag">25-mark essays</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>University &amp; foundations</h3>
+            <p>
+              Support with first-year micro &amp; macro, maths for economics, short projects and presentations – without the heavy jargon.
+            </p>
+            <div class="card-tags">
+              <span class="tag">Micro</span>
+              <span class="tag">Macro</span>
+              <span class="tag">Diagrams</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Business &amp; startup economics</h3>
+            <p>
+              Demand and pricing analysis, simple forecasts and plain-English breakdowns of interest rates, inflation and policy changes.
+            </p>
+            <div class="card-tags">
+              <span class="tag">Pricing</span>
+              <span class="tag">Market structure</span>
+              <span class="tag">Cash-flow</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <div class="container">
+        <div class="section-heading">
+          <div class="pill"><span class="dot"></span>How it works</div>
+          <h2>Simple process. Clear progress every week.</h2>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-num">1</div>
+            <h3>Free intro chat</h3>
+            <p>
+              A quick 15-minute call to understand your exam board, targets and where you’re currently stuck.
+            </p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">2</div>
+            <h3>Personalised study map</h3>
+            <p>
+              You get a tailored plan with topics, diagrams and past papers scheduled right up to your exam dates.
+            </p>
+          </article>
+
+          <article class="step">
+            <div class="step-num">3</div>
+            <h3>Weekly sessions &amp; check-ins</h3>
+            <p>
+              1:1 calls with live worked examples, plus quick support on questions between sessions.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="section-heading">
+          <div class="pill"><span class="dot"></span>Results</div>
+          <h2>Students don’t just pass – they level up.</h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <article class="testimonial">
+            <p>
+              “I went from a borderline 5 to a solid 8 in GCSE Economics. The way supply and demand was explained finally made sense.”
+            </p>
+            <span>– GCSE Student, OCR</span>
+          </article>
+
+          <article class="testimonial">
+            <p>
+              “The 25-mark essay structures were a game-changer. I hit an A this year after being stuck on a C/B for ages.”
+            </p>
+            <span>– A-Level Student, AQA</span>
+          </article>
+
+          <article class="testimonial">
+            <p>
+              “Natenomics helped us understand how interest rate rises would hit our small business and adjust prices confidently.”
+            </p>
+            <span>– Small Business Owner</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section id="resources">
+      <div class="container">
+        <div class="section-heading">
+          <div class="pill"><span class="dot"></span>Free resources</div>
+          <h2>Grab notes and diagrams to boost your revision.</h2>
+        </div>
+
+        <div class="resources-grid">
+          <article class="resource-card">
+            <h3>Natenomics exam toolkit</h3>
+            <p>
+              A concise PDF pack of the most important diagrams, definitions and evaluation points for OCR &amp; A-Level Economics.
+            </p>
+            <ul class="resource-list">
+              <li>Market failure, externalities &amp; government intervention</li>
+              <li>Labour markets, minimum wages &amp; inequality</li>
+              <li>Macro policies, inflation, unemployment and growth</li>
+              <li>Bonus: 3 sample 25-mark plans with evaluation</li>
+            </ul>
+          </article>
+
+          <article class="resource-card">
+            <h3>Join the Natenomics mailing list</h3>
+            <p>
+              Get short, clear breakdowns of big economic stories, exam tips and new free resources.
+            </p>
+
+            <form class="email-signup" onsubmit="event.preventDefault(); alert('Nice – you’re on the (demo) list!');">
+              <input type="email" placeholder="your@email.com" required />
+              <button class="btn btn-primary" type="submit">Join</button>
+            </form>
+
+            <p class="muted" style="font-size:0.78rem;margin-top:0.6rem;">
+              No spam. Just useful economics and exam help, usually once a week.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <div class="pill"><span class="dot"></span>Get in touch</div>
+          <h2>Ready to level up your economics?</h2>
+          <p>Fill in the form and Natenomics will get back to you with times for a free intro call.</p>
+        </div>
+
+        <div class="contact-grid">
+          <form class="contact-card" onsubmit="event.preventDefault(); alert('Message sent (demo). I’ll get back to you ASAP.');">
+            <label for="name">Name</label>
+            <input id="name" name="name" placeholder="Your name" required />
+
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="you@example.com" required />
+
+            <label for="level">What level are you studying?</label>
+            <select id="level" name="level" required>
+              <option value="">Select one…</option>
+              <option>GCSE</option>
+              <option>A-Level</option>
+              <option>University</option>
+              <option>Business / Other</option>
+            </select>
+
+            <label for="message">What do you need help with?</label>
+            <textarea id="message" name="message" placeholder="Tell me about your course, exam board, target grade or business question."></textarea>
+
+            <button class="btn btn-primary" type="submit" style="width:100%;margin-top:0.3rem;">
+              Send message
+            </button>
+          </form>
+
+          <div class="contact-side">
+            <p>
+              Prefer email? You can also reach out directly:
+            </p>
+            <ul>
+              <li><strong>Email:</strong> info@natenomics.com</li>
+              <li><strong>Instagram / TikTok:</strong> @natenomics</li>
+              <li><strong>Location:</strong> UK-based, online worldwide</li>
+            </ul>
+
+            <p style="margin-top:1.2rem;">
+              Sessions are usually evenings and weekends (UK time), but exam-season slots can be more flexible.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> Natenomics. Economics made simple.</span>
+      <div class="footer-links">
+        <a href="#hero">Back to top</a>
+        <a href="#services">Services</a>
+        <a href="#resources">Resources</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Current year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+    const navCta = document.getElementById("navCta");
+    const header = document.querySelector(".nav");
+
+    navToggle.addEventListener("click", () => {
+      header.classList.toggle("nav-menu-open");
+    });
+
+    // Close menu when clicking a link (mobile)
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => header.classList.remove("nav-menu-open"));
+    });
+  </script>
+</body>
+</html>
